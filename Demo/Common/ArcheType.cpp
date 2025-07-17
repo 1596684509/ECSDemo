@@ -83,3 +83,11 @@ Entity* ArcheType::getEntity(size_t index) {
 	return nullptr;
 
 }
+
+int ArcheType::getComponentCount() {
+	return components.size();
+}
+
+int ArcheType::getEntityCount() {
+	return entitys.size();
+}

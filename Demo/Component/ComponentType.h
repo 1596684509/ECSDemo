@@ -5,6 +5,8 @@
 enum class ComponentType {
 	Position = 0,
 	Velocity,
+	InputKey,
+	MoveState,
 	Count
 
 };

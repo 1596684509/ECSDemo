@@ -1,5 +1,7 @@
 #include "World.h"
 
+#include "../System/InputSystem.h"
+
 void World::commitComponent() {
 
 	for (auto& entity : componentCash) {
@@ -37,5 +39,47 @@ void World::commitComponent() {
 	}
 
 	componentCash.clear();
+
+}
+
+void World::registerUpdateSystem(UpdateSystem* system) {
+
+	updateSystems.push_back(system);
+
+}
+
+void World::registerInputSystem(InputSystem *system) {
+	inputSystems.push_back(system);
+}
+
+void World::registerDrawSystem(DrawSystem *system) {
+	drawSystems.push_back(system);
+}
+
+void World::onUpdate(int delta) {
+
+	for (auto& system : updateSystems) {
+
+		system->onUpdate(this, delta);
+
+	}
+
+}
+
+void World::onInput(GLFWwindow *window, int key, int scancode, int action, int mods) {
+
+	for (auto& system : inputSystems) {
+
+		system->onPress(this, window, key, scancode, action, mods);
+
+	}
+
+}
+
+void World::onDraw() {
+
+	for (auto& system : drawSystems) {
+		system->onDraw(this);
+	}
 
 }

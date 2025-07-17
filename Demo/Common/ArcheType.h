@@ -3,12 +3,10 @@
 #include <vector>
 #include <unordered_map>
 #include <typeindex>
-#include <stdexcept>
 
 #include "../Common/Entity.h"
 #include "../Component/Component.h"
 #include "../Utils/BitMask.h"
-#include "../Component/ComponentType.h"
 #include "../Component/ComponentBitMaskDigits.h"
 
 class ArcheType {
@@ -24,6 +22,8 @@ public:
 	bool hasComponent();
 	template<typename T>
 	std::vector<T*> getComponts();
+	int getComponentCount();
+	int getEntityCount();
 
 private:
 	BitMask* bitMask = nullptr;
