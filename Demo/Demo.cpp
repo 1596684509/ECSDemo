@@ -44,15 +44,22 @@ int main() {
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 	GLFWwindow* window = glfwCreateWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "Demo", nullptr, nullptr);
 
+
 	if (!window) {
 		glfwTerminate();
 		return - 1;
 	}
 
+	glfwMakeContextCurrent(window);
+
+	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
+		return -1;
+	}
+
 	initEntity();
 	initSystem();
 
-	glfwMakeContextCurrent(window);
+	
 	glfwSetKeyCallback(window, onInput);
 
 	DWORD64 start = GetTickCount64();
@@ -67,7 +74,9 @@ int main() {
 		//更新
 		world.onUpdate(update);
 		//绘制
+		glClear(GL_COLOR_BUFFER_BIT);
 		world.onDraw();
+		glfwSwapBuffers(window);
 		//限制帧数
 		DWORD64 loopEnd = GetTickCount64();
 		DWORD64 diff = loopEnd - loopStart;

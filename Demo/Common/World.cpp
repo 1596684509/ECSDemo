@@ -70,7 +70,19 @@ void World::onInput(GLFWwindow *window, int key, int scancode, int action, int m
 
 	for (auto& system : inputSystems) {
 
-		system->onPress(this, window, key, scancode, action, mods);
+		if (action == GLFW_PRESS) {
+		
+			system->onPress(this, window, key, scancode, mods);
+
+		}else if (action == GLFW_RELEASE) {
+		
+			system->onRelease(this, window, key, scancode, mods);
+
+		}else {
+		
+			system->onRepeat(this, window, key, scancode, mods);
+
+		}
 
 	}
 

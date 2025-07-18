@@ -1,6 +1,6 @@
 #include "MoveInputSystem.h"
 
-void MoveInputSystem::onPress(World *world, GLFWwindow *window, int key, int scancode, int action, int mods) {
+void MoveInputSystem::onPress(World *world, GLFWwindow *window, int key, int scancode, int mods) {
 
     std::vector<ArcheType*> archeTypes = world->getArcheType<MoveState, InputKey>();
     for (ArcheType* archeType : archeTypes) {
@@ -22,7 +22,7 @@ void MoveInputSystem::onPress(World *world, GLFWwindow *window, int key, int sca
 
 }
 
-void MoveInputSystem::onRelease(World *world, GLFWwindow *window, int key, int scancode, int action, int mods) {
+void MoveInputSystem::onRelease(World *world, GLFWwindow *window, int key, int scancode, int mods) {
 
     std::vector<ArcheType*> archeTypes = world->getArcheType<MoveState, InputKey>();
     for (ArcheType* archeType : archeTypes) {
@@ -44,5 +44,5 @@ void MoveInputSystem::onRelease(World *world, GLFWwindow *window, int key, int s
 
 }
 
-void MoveInputSystem::onRepeat(World *world, GLFWwindow *window, int key, int scancode, int action, int mods) {
+void MoveInputSystem::onRepeat(World *world, GLFWwindow *window, int key, int scancode, int mods) {
 }

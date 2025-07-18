@@ -8,9 +8,9 @@
 
 class MoveInputSystem: public InputSystem {
 public:
-    void onPress(World *world, GLFWwindow *window, int key, int scancode, int action, int mods) override;
+    void onPress(World *world, GLFWwindow *window, int key, int scancode, int mods) override;
 
-    void onRelease(World *world, GLFWwindow *window, int key, int scancode, int action, int mods) override;
+    void onRelease(World *world, GLFWwindow *window, int key, int scancode, int mods) override;
 
-    void onRepeat(World *world, GLFWwindow *window, int key, int scancode, int action, int mods) override;
+    void onRepeat(World *world, GLFWwindow *window, int key, int scancode, int mods) override;
 };

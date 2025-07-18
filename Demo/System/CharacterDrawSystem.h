@@ -2,11 +2,12 @@
 
 #include <windows.h>
 #include <vector>
+#include <glad/glad.h>
 #include <cmath>
-#include <GL/gl.h>
 
 #include "DrawSystem.h"
 #include "../Common/World.h"
+#include "../Common/Const.h"
 
 
 class CharacterDrawSystem: public DrawSystem {
