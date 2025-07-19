@@ -59,13 +59,12 @@ static unsigned int createProgram() {
 
 void CharacterDrawSystem::onDraw(World* world) {
     if (!initialized) {
-        // 生成?位??点(三角扇)
         std::vector<float> vertices;
         vertices.push_back(0.0f);
         vertices.push_back(0.0f);
         for (int i = 0; i <= segments; ++i) {
             float angle = 2.0f * 3.1415926f * i / segments;
-            vertices.push_back(cos(angle) * 0.05f); 
+            vertices.push_back(cos(angle) * 0.05f);
             vertices.push_back(sin(angle) * 0.05f);
         }
 
@@ -99,9 +98,7 @@ void CharacterDrawSystem::onDraw(World* world) {
 
             float ndcX = (position->x / (WINDOW_WIDTH / 2.0f)) - 1.0f;
             float ndcY = 1.0f - (position->y / (WINDOW_HEIGHT / 2.0f));
-            // ?置当前?体?形偏移
             glUniform2f(offsetLoc, ndcX, ndcY);
-            // ?制三角扇，?点数 = segments + 2 (?心 + segments+1点)
             glDrawArrays(GL_TRIANGLE_FAN, 0, segments + 2);
         }
     }

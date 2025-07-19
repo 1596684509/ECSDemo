@@ -24,8 +24,8 @@ add_executable (Demo "Demo.cpp" "Demo.h" "Utils/UUIDHandler.h" "Lib/glad.c" "Com
         System/InputSystem.h
         System/DrawSystem.cpp
         System/DrawSystem.h
-        System/CharacterDrawSystem.cpp
         System/CharacterDrawSystem.h
+        System/CharacterDrawSystem.cpp
 )
 
 target_link_libraries(Demo glfw3 opengl32)
