@@ -26,7 +26,7 @@ add_executable (Demo "Demo.cpp" "Demo.h" "Utils/UUIDHandler.h" "Lib/glad.c" "Com
         System/DrawSystem.h
         System/CharacterDrawSystem.h
         System/CharacterDrawSystem.cpp
-)
+ "Common/EventBus.h" "Event/Event.h" "Common/EventBus.cpp")
 
 target_link_libraries(Demo glfw3 opengl32)
 
