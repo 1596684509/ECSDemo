@@ -6,12 +6,12 @@
 #include <functional>
 
 #include "../Event/Event.h"
+#include "../Listener/AbstractEventListener.h"
+#include "../Listener/EventListener.h"
 
 class EventBus {
 
 public:
-	template<typename T>
-	using Handler = std::function<void(const T*)>;
 	//创建事件
 	template<typename T>
 	T* createEvent();
@@ -19,10 +19,10 @@ public:
 	void releaseEvent(Event* event);
 	//注册事件
 	template<typename T>
-	void registerEvent(Handler<T> handler);
+	void registerEvent(EventListener<T>* listener);
 	//发布事件
 	template<typename T>
-	void emit(const T* event);
+	void emit(T* event);
 	//提交并执行
 	void commit();
 	void clearEventList();
@@ -33,7 +33,7 @@ private:
 	//待处理事件队列
 	std::vector<Event*> eventList;
 	//监听器
-	std::unordered_map<std::type_index, std::vector<std::function<void(const Event&)>>> listeners;
+	std::unordered_map<std::type_index, std::vector<AbstractEventListener*>> listeners;
 
 };
 
@@ -48,7 +48,7 @@ T* EventBus::createEvent() {
 
 	}else {
 
-		T* e = events.back();
+		T* e = static_cast<T*>(events.back());
 		events.pop_back();
 		return e;
 
@@ -57,17 +57,15 @@ T* EventBus::createEvent() {
 }
 
 template<typename T>
-void EventBus::registerEvent(Handler<T> handler) {
+void EventBus::registerEvent(EventListener<T>* listener) {
 
 	auto& vec = listeners[typeid(T)];
-	vec.push_back([handler](const Event& e) {
-		handler(static_cast<const T&>(e));
-		});
+	vec.push_back(listener);
 
 }
 
 template<typename T>
-void EventBus::emit(const T* event) {
+void EventBus::emit(T* event) {
 
 	eventList.emplace_back(event);
 

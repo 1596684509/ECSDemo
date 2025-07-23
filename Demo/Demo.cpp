@@ -28,7 +28,8 @@ void initEntity() {
 
 void initSystem() {
 
-	world.registerInputSystem(new MoveInputSystem());
+	world.getEventBus()->registerEvent<InputEvent>(new MoveInputListener(&world));
+
 	world.registerUpdateSystem(new MoveUpdateSystem());
 	world.registerDrawSystem(new CharacterDrawSystem());
 
@@ -72,6 +73,7 @@ int main() {
 		//处理IO
 		glfwPollEvents();
 		//更新
+		world.getEventBus()->commit();
 		world.onUpdate(update);
 		//绘制
 		glClear(GL_COLOR_BUFFER_BIT);

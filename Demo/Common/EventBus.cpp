@@ -1,5 +1,7 @@
 #include "EventBus.h"
 
+std::unordered_map<std::type_index, std::vector<Event*>> EventBus::eventPool;
+
 void EventBus::releaseEvent(Event* event) {
 
 	event->reset();
@@ -12,8 +14,8 @@ void EventBus::commit() {
     for (auto& event : eventList) {
         auto it = listeners.find(typeid(*event));
         if (it != listeners.end()) {
-            for (auto& handler : it->second) {
-                handler(*event);
+            for (auto& listener : it->second) {
+                listener->handler(event);
             }
         }
     }

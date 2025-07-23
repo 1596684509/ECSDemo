@@ -1,6 +1,5 @@
 #include "World.h"
 
-#include "../System/InputSystem.h"
 
 void World::commitComponent() {
 
@@ -48,9 +47,6 @@ void World::registerUpdateSystem(UpdateSystem* system) {
 
 }
 
-void World::registerInputSystem(InputSystem *system) {
-	inputSystems.push_back(system);
-}
 
 void World::registerDrawSystem(DrawSystem *system) {
 	drawSystems.push_back(system);
@@ -68,23 +64,12 @@ void World::onUpdate(int delta) {
 
 void World::onInput(GLFWwindow *window, int key, int scancode, int action, int mods) {
 
-	for (auto& system : inputSystems) {
+	InputEvent* input = getEventBus()->createEvent<InputEvent>();
+	input->action = action;
+	input->key = key;
+	input->mods = mods;
 
-		if (action == GLFW_PRESS) {
-		
-			system->onPress(this, window, key, scancode, mods);
-
-		}else if (action == GLFW_RELEASE) {
-		
-			system->onRelease(this, window, key, scancode, mods);
-
-		}else {
-		
-			system->onRepeat(this, window, key, scancode, mods);
-
-		}
-
-	}
+	getEventBus()->emit<InputEvent>(input);
 
 }
 
@@ -93,5 +78,17 @@ void World::onDraw() {
 	for (auto& system : drawSystems) {
 		system->onDraw(this);
 	}
+
+}
+
+EventBus* World::getEventBus() {
+
+	if (!eventBus) {
+	
+		eventBus = new EventBus();
+
+	}
+
+	return eventBus;
 
 }
