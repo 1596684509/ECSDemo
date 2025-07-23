@@ -18,15 +18,15 @@ add_executable (Demo "Demo.cpp" "Demo.h" "Utils/UUIDHandler.h" "Lib/glad.c" "Com
         Component/MoveState.h
         System/MoveUpdateSystem.cpp
         System/MoveUpdateSystem.h
-        System/MoveInputSystem.cpp
-        System/MoveInputSystem.h
-        System/InputSystem.cpp
-        System/InputSystem.h
+        
+        
+        
+        
         System/DrawSystem.cpp
         System/DrawSystem.h
         System/CharacterDrawSystem.h
         System/CharacterDrawSystem.cpp
-)
+ "Common/EventBus.h" "Event/Event.h" "Common/EventBus.cpp"  "Listener/EventListener.h" "Listener/AbstractEventListener.cpp" "Listener/AbstractEventListener.h" "Listener/EventListener.cpp" "Listener/MoveInputListener.h" "Event/InputEvent.h" "Listener/MoveInputListener.cpp" "Event/InputEvent.cpp")
 
 target_link_libraries(Demo glfw3 opengl32)
 

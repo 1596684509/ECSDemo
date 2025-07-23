@@ -13,11 +13,13 @@
 #include "../Component/ComponentBitMaskDigits.h"
 #include "../System/UpdateSystem.h"
 #include "../System/DrawSystem.h"
-#include "../System/InputSystem.h"
+#include "../Event/InputEvent.h"
+#include "EventBus.h"
 
 class World {
 
 public:
+
 	template <typename T>
 	void addComponent(Entity* entity, T* component);
 	template <typename... T>
@@ -25,20 +27,21 @@ public:
 	void commitComponent();
 
 	void registerUpdateSystem(UpdateSystem* system);
-	void registerInputSystem(InputSystem* system);
 	void registerDrawSystem(DrawSystem* system);
 
 	void onUpdate(int delta);
 	void onInput(GLFWwindow* window, int key, int scancode, int action, int mods);
 	void onDraw();
 
+	EventBus* getEventBus();
+
 private:
 	std::unordered_map<int, Entity*> entitys;
 	std::unordered_map<std::string, ArcheType*> archeTypes;
 	std::unordered_map<Entity*, std::unordered_map<std::type_index, Component*>> componentCash;
 	std::vector<UpdateSystem*> updateSystems;
-	std::vector<InputSystem*> inputSystems;
 	std::vector<DrawSystem*> drawSystems;
+	EventBus* eventBus = nullptr;
 
 };
 

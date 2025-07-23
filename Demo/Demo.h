@@ -16,9 +16,9 @@
 #include "Common/ArcheType.h"
 #include "Common/World.h"
 #include "Component/Velocity.h"
-#include "System/MoveInputSystem.h"
 #include "System/CharacterDrawSystem.h"
 #include "System/MoveUpdateSystem.h"
+#include "Listener/MoveInputListener.h"
 
 
 // TODO: プログラムに必要な追加ヘッダーをここで参照します。
