@@ -11,5 +11,6 @@ public:
     bool isRight = false;
     bool isDown = false;
     bool isJump = false;
+    bool isRun = false;
 
 };

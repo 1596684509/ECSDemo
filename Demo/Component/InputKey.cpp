@@ -11,3 +11,8 @@ void InputKey::setMoveKey(int moveDown, int moveLeft, int moveRight) {
 void InputKey::setJumpKey(int jump) {
     this->jump = jump;
 }
+
+void InputKey::setRun(int run) {
+    this->run = run;
+}
+

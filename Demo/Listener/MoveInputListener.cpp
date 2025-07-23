@@ -32,6 +32,7 @@ void MoveInputListener::onPress(int key, int mods) {
 
             if (key == inputKey->moveLeft) moveState->isLeft = true;
             if (key == inputKey->moveRight) moveState->isRight = true;
+            if (key == inputKey->run) moveState->isRun = true;
 
         }
 
@@ -54,6 +55,7 @@ void MoveInputListener::onRelease(int key, int mods) {
 
             if (key == inputKey->moveLeft) moveState->isLeft = false;
             if (key == inputKey->moveRight) moveState->isRight = false;
+            if (key == inputKey->run) moveState->isRun = false;
 
         }
 

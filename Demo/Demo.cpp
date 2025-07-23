@@ -20,6 +20,7 @@ void initEntity() {
 	world.addComponent(entity1, new MoveState());
 	InputKey* inputKey = new InputKey();
 	inputKey->setMoveKey(GLFW_KEY_S, GLFW_KEY_A, GLFW_KEY_D);
+	inputKey->setRun(GLFW_KEY_SPACE);
 	world.addComponent(entity1, inputKey);
 	world.addComponent(entity1, new Velocity(0.5f, 0.5f));
 	world.commitComponent();

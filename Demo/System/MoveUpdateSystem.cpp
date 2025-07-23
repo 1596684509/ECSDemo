@@ -20,10 +20,18 @@ void MoveUpdateSystem::onUpdate(World *world, int delta) {
             Velocity* velocity = velocitys[i];
             MoveState* moveState = moveStates[i];
 
+            float speedX = velocity->x;
+
             if (moveState->canMove) {
 
+                if (moveState->isRun) {
+                
+                    speedX *= 2;
+
+                }
+
                 int direction = moveState->isRight - moveState->isLeft;
-                position->x += velocity->x * delta * direction;
+                position->x += speedX * delta * direction;
 
             }
 
