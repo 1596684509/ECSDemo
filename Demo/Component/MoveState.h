@@ -6,6 +6,7 @@ class MoveState: public Component {
 
 public:
     bool canMove = true;
+    bool canJump = true;
     bool isMoving = false;
     bool isLeft = false;
     bool isRight = false;

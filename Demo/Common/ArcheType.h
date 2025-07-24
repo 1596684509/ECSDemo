@@ -22,6 +22,8 @@ public:
 	bool hasComponent();
 	template<typename T>
 	std::vector<T*> getComponts();
+	template<typename T>
+	T* getComponentForIndex(size_t index);
 	int getComponentCount();
 	int getEntityCount();
 
@@ -53,4 +55,13 @@ std::vector<T*> ArcheType::getComponts() {
 	}
 
 	return result;
+}
+
+template<typename T>
+T* ArcheType::getComponentForIndex(size_t index) {
+	if (hasComponent<T>()) {
+		auto& vec = components[typeid(T)];
+		return static_cast<T*>(vec.at(index));
+	}
+	return nullptr;
 }

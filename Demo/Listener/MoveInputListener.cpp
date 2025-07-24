@@ -33,6 +33,14 @@ void MoveInputListener::onPress(int key, int mods) {
             if (key == inputKey->moveLeft) moveState->isLeft = true;
             if (key == inputKey->moveRight) moveState->isRight = true;
             if (key == inputKey->run) moveState->isRun = true;
+            if (key == inputKey->jump && moveState->canJump) {
+            
+                JumpEvent* jumpEvent = world->getEventBus()->createEvent<JumpEvent>();
+                jumpEvent->archeType = archeType;
+                jumpEvent->index = i;
+                world->getEventBus()->emit<JumpEvent>(jumpEvent);
+
+            }
 
         }
 

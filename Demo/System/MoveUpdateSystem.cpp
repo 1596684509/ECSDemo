@@ -30,8 +30,16 @@ void MoveUpdateSystem::onUpdate(World *world, int delta) {
 
                 }
 
+                if (moveState->isJump && velocity->y == 0) {
+                
+                    moveState->isJump = false;
+                    moveState->canJump = true;
+
+                }
+
                 int direction = moveState->isRight - moveState->isLeft;
                 position->x += speedX * delta * direction;
+                position->y += velocity->y;
 
             }
 

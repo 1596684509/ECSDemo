@@ -7,8 +7,9 @@
 #include "EventListener.h"
 #include "../Event/InputEvent.h"
 #include "../Common/World.h"
+#include "../Event/JumpEvent.h"
 
-class MoveInputListener : public EventListener<InputEvent> {
+class MoveInputListener: public EventListener<InputEvent>{
 
 public:
 	MoveInputListener(World* world);
