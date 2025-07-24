@@ -27,13 +27,15 @@ void EventBus::commit() {
 void EventBus::clearEventList() {
 
     for (Event* e : eventList) {
-    
-        e->reset();
-        eventPool[typeid(e)].emplace_back(e);
+
+        if (e->runEnd) {
+            e->reset();
+            eventPool[typeid(e)].emplace_back(e);
+        }
 
     }
 
-    eventList.clear();
+    eventList.erase(std::remove_if(eventList.begin(), eventList.end(), [](Event* e) { return e->runEnd; }), eventList.end());
 
 }
 

@@ -14,7 +14,7 @@ void JumpListener::onEvent(const JumpEvent* event) {
 	
 		moveState->canJump = false;
 		moveState->isJump = true;
-		velocity->y += -20;
+		velocity->y += -5;
 
 	}
 
