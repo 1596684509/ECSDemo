@@ -7,6 +7,7 @@ enum class ComponentType {
 	Velocity,
 	InputKey,
 	MoveState,
+	Gravity,
 	Count
 
 };

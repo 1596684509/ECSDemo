@@ -4,6 +4,7 @@
 #include "MoveState.h"
 #include "Position.h"
 #include "Velocity.h"
+#include "Gravity.h"
 
 template<typename T>
 struct ComponentBitMaskDigits;
@@ -30,4 +31,10 @@ template<>
 struct ComponentBitMaskDigits<MoveState> {
 public:
 	static constexpr int bitMaskDigits = (int)ComponentType::MoveState;
+};
+
+template<>
+struct ComponentBitMaskDigits<Gravity> {
+public:
+	static constexpr int bitMaskDigits = (int)ComponentType::Gravity;
 };

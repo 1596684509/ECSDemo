@@ -16,13 +16,24 @@ void onInput(GLFWwindow* window, int key, int scancode, int action, int mods) {
 void initEntity() {
 
 	Entity* entity1 = new Entity();
-	world.addComponent(entity1, new Position(400, 300));
+	world.addComponent(entity1, new Position(300, 300));
 	world.addComponent(entity1, new MoveState());
-	InputKey* inputKey = new InputKey();
-	inputKey->setMoveKey(GLFW_KEY_S, GLFW_KEY_A, GLFW_KEY_D);
-	inputKey->setRun(GLFW_KEY_SPACE);
-	world.addComponent(entity1, inputKey);
+	InputKey* inputKey1 = new InputKey();
+	inputKey1->setMoveKey(GLFW_KEY_S, GLFW_KEY_A, GLFW_KEY_D);
+	inputKey1->setRun(GLFW_KEY_SPACE);
+	world.addComponent(entity1, inputKey1);
 	world.addComponent(entity1, new Velocity(0.5f, 0.5f));
+	world.addComponent(entity1, new Gravity(0.98f));
+
+	Entity* entity2 = new Entity();
+	world.addComponent(entity2, new Position(600, 300));
+	world.addComponent(entity2, new MoveState());
+	InputKey* inputKey2 = new InputKey();
+	inputKey2->setMoveKey(GLFW_KEY_DOWN, GLFW_KEY_LEFT, GLFW_KEY_RIGHT);
+	inputKey2->setRun(GLFW_KEY_SPACE);
+	world.addComponent(entity2, inputKey2);
+	world.addComponent(entity2, new Velocity(0.5f, 0.5f));
+
 	world.commitComponent();
 
 }
@@ -32,6 +43,7 @@ void initSystem() {
 	world.getEventBus()->registerEvent<InputEvent>(new MoveInputListener(&world));
 
 	world.registerUpdateSystem(new MoveUpdateSystem());
+	world.registerUpdateSystem(new GravityUpdateSystem());
 	world.registerDrawSystem(new CharacterDrawSystem());
 
 }
