@@ -19,6 +19,8 @@
 #include "System/CharacterDrawSystem.h"
 #include "System/MoveUpdateSystem.h"
 #include "Listener/MoveInputListener.h"
+#include "Component/Gravity.h"
+#include "System/GravityUpdateSystem.h"
 
 
 // TODO: プログラムに必要な追加ヘッダーをここで参照します。
