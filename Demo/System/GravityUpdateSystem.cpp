@@ -6,9 +6,9 @@ void GravityUpdateSystem::onUpdate(World* world, int delta) {
 
     for (auto& arche : arches) {
 
-        std::vector<Velocity*>velocitys = arche->getComponts<Velocity>();
-        std::vector<Position*>positions = arche->getComponts<Position>();
-        std::vector<Gravity*>gravitys = arche->getComponts<Gravity>();
+        std::vector<Velocity*>velocitys = arche->getComponents<Velocity>();
+        std::vector<Position*>positions = arche->getComponents<Position>();
+        std::vector<Gravity*>gravitys = arche->getComponents<Gravity>();
 
         for (int i = 0; i < arche->getEntityCount(); ++i) {
 

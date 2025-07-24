@@ -4,49 +4,49 @@
 
 using namespace std;
 
-World world;
+World* world = new World();
 bool isRunning = true;
 
 void onInput(GLFWwindow* window, int key, int scancode, int action, int mods) {
 
-	world.onInput(window, key, scancode, action, mods);
+	world->onInput(window, key, scancode, action, mods);
 
 }
 
 void initEntity() {
 
 	Entity* entity1 = new Entity();
-	world.addComponent(entity1, new Position(300, 300));
-	world.addComponent(entity1, new MoveState());
+	world->addComponent(entity1, new Position(300, 300));
+	world->addComponent(entity1, new MoveState());
 	InputKey* inputKey1 = new InputKey();
 	inputKey1->setMoveKey(GLFW_KEY_S, GLFW_KEY_A, GLFW_KEY_D);
 	inputKey1->setRun(GLFW_KEY_SPACE);
 	inputKey1->setJumpKey(GLFW_KEY_W);
-	world.addComponent(entity1, inputKey1);
-	world.addComponent(entity1, new Velocity(0.5f, 0));
-	world.addComponent(entity1, new Gravity(0.98f));
+	world->addComponent(entity1, inputKey1);
+	world->addComponent(entity1, new Velocity(0.5f, 0));
+	world->addComponent(entity1, new Gravity(0.98f));
 
 	Entity* entity2 = new Entity();
-	world.addComponent(entity2, new Position(600, 300));
-	world.addComponent(entity2, new MoveState());
+	world->addComponent(entity2, new Position(600, 300));
+	world->addComponent(entity2, new MoveState());
 	InputKey* inputKey2 = new InputKey();
 	inputKey2->setMoveKey(GLFW_KEY_DOWN, GLFW_KEY_LEFT, GLFW_KEY_RIGHT);
 	inputKey2->setRun(GLFW_KEY_SPACE);
-	world.addComponent(entity2, inputKey2);
-	world.addComponent(entity2, new Velocity(0.5f, 0));
+	world->addComponent(entity2, inputKey2);
+	world->addComponent(entity2, new Velocity(0.5f, 0));
 
-	world.commitComponent();
+	world->commitComponent();
 
 }
 
 void initSystem() {
 
-	world.getEventBus()->registerEvent<InputEvent>(new MoveInputListener(&world));
-	world.getEventBus()->registerEvent<JumpEvent>(new JumpListener(&world));
+	world->getEventBus()->registerEvent<InputEvent>(new MoveInputListener(world));
+	world->getEventBus()->registerEvent<JumpEvent>(new JumpListener(world));
 
-	world.registerUpdateSystem(new MoveUpdateSystem());
-	world.registerUpdateSystem(new GravityUpdateSystem());
-	world.registerDrawSystem(new CharacterDrawSystem());
+	world->registerUpdateSystem(new MoveUpdateSystem());
+	world->registerUpdateSystem(new GravityUpdateSystem());
+	world->registerDrawSystem(new CharacterDrawSystem());
 
 }
 
@@ -88,11 +88,11 @@ int main() {
 		//处理IO
 		glfwPollEvents();
 		//更新
-		world.getEventBus()->commit();
-		world.onUpdate(update);
+		world->getEventBus()->commit();
+		world->onUpdate(update);
 		//绘制
 		glClear(GL_COLOR_BUFFER_BIT);
-		world.onDraw();
+		world->onDraw();
 		glfwSwapBuffers(window);
 		//限制帧数
 		DWORD64 loopEnd = GetTickCount64();

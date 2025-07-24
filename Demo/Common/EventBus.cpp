@@ -36,3 +36,9 @@ void EventBus::clearEventList() {
     eventList.clear();
 
 }
+
+void EventBus::emit(Event* event) {
+
+    eventList.emplace_back(event);
+
+}

@@ -1,5 +1,7 @@
 #include "World.h"
 
+#include "../Event/JumpEvent.h"
+
 
 void World::commitComponent() {
 
@@ -69,7 +71,7 @@ void World::onInput(GLFWwindow *window, int key, int scancode, int action, int m
 	input->key = key;
 	input->mods = mods;
 
-	getEventBus()->emit<InputEvent>(input);
+	getEventBus()->emit(input);
 
 }
 

@@ -10,9 +10,9 @@ void MoveUpdateSystem::onUpdate(World *world, int delta) {
 
     for (auto& arche : arches) {
 
-        std::vector<Position*>positions = arche->getComponts<Position>();
-        std::vector<Velocity*>velocitys = arche->getComponts<Velocity>();
-        std::vector<MoveState*>moveStates = arche->getComponts<MoveState>();
+        std::vector<Position*>positions = arche->getComponents<Position>();
+        std::vector<Velocity*>velocitys = arche->getComponents<Velocity>();
+        std::vector<MoveState*>moveStates = arche->getComponents<MoveState>();
 
         for (int i = 0; i < arche->getEntityCount(); ++i) {
 

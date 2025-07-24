@@ -8,6 +8,6 @@
 
 class JumpListener: public EventListener<JumpEvent> {
 public:
-	JumpListener(World* world);
+	explicit JumpListener(World* world);
 	void onEvent(const JumpEvent* event) override;
 };

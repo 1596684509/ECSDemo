@@ -21,7 +21,7 @@ public:
 	template<typename... T>
 	bool hasComponent();
 	template<typename T>
-	std::vector<T*> getComponts();
+	std::vector<T*> getComponents();
 	template<typename T>
 	T* getComponentForIndex(size_t index);
 	int getComponentCount();
@@ -42,7 +42,7 @@ bool ArcheType::hasComponent() {
 }
 
 template<typename T>
-std::vector<T*> ArcheType::getComponts() {
+std::vector<T*> ArcheType::getComponents() {
 	std::vector<T*> result;
 
 	auto it = components.find(typeid(T));

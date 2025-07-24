@@ -22,8 +22,8 @@ void MoveInputListener::onPress(int key, int mods) {
     std::vector<ArcheType*> archeTypes = world->getArcheType<MoveState, InputKey>();
     for (ArcheType* archeType : archeTypes) {
 
-        std::vector<MoveState*> moves = archeType->getComponts<MoveState>();
-        std::vector<InputKey*> inputKeys = archeType->getComponts<InputKey>();
+        std::vector<MoveState*> moves = archeType->getComponents<MoveState>();
+        std::vector<InputKey*> inputKeys = archeType->getComponents<InputKey>();
 
         for (int i = 0; i < archeType->getEntityCount(); ++i) {
 
@@ -38,7 +38,7 @@ void MoveInputListener::onPress(int key, int mods) {
                 JumpEvent* jumpEvent = world->getEventBus()->createEvent<JumpEvent>();
                 jumpEvent->archeType = archeType;
                 jumpEvent->index = i;
-                world->getEventBus()->emit<JumpEvent>(jumpEvent);
+                world->getEventBus()->emit(jumpEvent);
 
             }
 
@@ -53,8 +53,8 @@ void MoveInputListener::onRelease(int key, int mods) {
     std::vector<ArcheType*> archeTypes = world->getArcheType<MoveState, InputKey>();
     for (ArcheType* archeType : archeTypes) {
 
-        std::vector<MoveState*> moves = archeType->getComponts<MoveState>();
-        std::vector<InputKey*> inputKeys = archeType->getComponts<InputKey>();
+        std::vector<MoveState*> moves = archeType->getComponents<MoveState>();
+        std::vector<InputKey*> inputKeys = archeType->getComponents<InputKey>();
 
         for (int i = 0; i < archeType->getEntityCount(); ++i) {
 
