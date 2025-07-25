@@ -93,11 +93,12 @@ void CharacterDrawSystem::onDraw(World* world) {
     std::vector<ArcheType*> archetypes = world->getArcheType<Position>();
 
     for (auto& archetype : archetypes) {
-        std::vector<Position*> positions = archetype->getComponts<Position>();
+        std::vector<Position*> positions = archetype->getComponents<Position>();
         for (auto& position : positions) {
 
             float ndcX = (position->x / (WINDOW_WIDTH / 2.0f)) - 1.0f;
             float ndcY = 1.0f - (position->y / (WINDOW_HEIGHT / 2.0f));
+
             glUniform2f(offsetLoc, ndcX, ndcY);
             glDrawArrays(GL_TRIANGLE_FAN, 0, segments + 2);
         }

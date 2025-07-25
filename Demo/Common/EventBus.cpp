@@ -11,11 +11,12 @@ void EventBus::releaseEvent(Event* event) {
 
 void EventBus::commit() {
 
-    for (auto& event : eventList) {
+    for (Event* event : eventList) {
         auto it = listeners.find(typeid(*event));
         if (it != listeners.end()) {
             for (auto& listener : it->second) {
                 listener->handler(event);
+                event->runEnd = true;
             }
         }
     }
@@ -27,12 +28,20 @@ void EventBus::commit() {
 void EventBus::clearEventList() {
 
     for (Event* e : eventList) {
-    
-        e->reset();
-        eventPool[typeid(e)].emplace_back(e);
+
+        if (e->runEnd) {
+            e->reset();
+            eventPool[typeid(e)].emplace_back(e);
+        }
 
     }
 
-    eventList.clear();
+    eventList.erase(std::remove_if(eventList.begin(), eventList.end(), [](Event* e) { return e->runEnd; }), eventList.end());
+
+}
+
+void EventBus::emit(Event* event) {
+
+    eventList.emplace_back(event);
 
 }

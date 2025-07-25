@@ -8,19 +8,23 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
-
-#include "Common/Const.h"
 #include "Utils/BitMask.h"
+#include "Common/Const.h"
 #include "Common/Entity.h"
-#include "Component/Position.h"
 #include "Common/ArcheType.h"
 #include "Common/World.h"
+
+#include "Component/Position.h"
 #include "Component/Velocity.h"
+#include "Component/Gravity.h"
+#include "Component/Jump.h"
+
 #include "System/CharacterDrawSystem.h"
 #include "System/MoveUpdateSystem.h"
-#include "Listener/MoveInputListener.h"
-#include "Component/Gravity.h"
 #include "System/GravityUpdateSystem.h"
+
+#include "Listener/MoveInputListener.h"
+#include "Listener/JumpListener.h"
 
 
 // TODO: プログラムに必要な追加ヘッダーをここで参照します。

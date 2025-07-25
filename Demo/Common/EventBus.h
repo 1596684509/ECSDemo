@@ -21,8 +21,7 @@ public:
 	template<typename T>
 	void registerEvent(EventListener<T>* listener);
 	//发布事件
-	template<typename T>
-	void emit(T* event);
+	void emit(Event* event);
 	//提交并执行
 	void commit();
 	void clearEventList();
@@ -64,9 +63,3 @@ void EventBus::registerEvent(EventListener<T>* listener) {
 
 }
 
-template<typename T>
-void EventBus::emit(T* event) {
-
-	eventList.emplace_back(event);
-
-}

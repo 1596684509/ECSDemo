@@ -6,12 +6,13 @@
 #include "AbstractEventListener.h"
 #include "../Event/Event.h"
 
+
 template<typename EventType>
 class EventListener : public AbstractEventListener {
 
 public:
-	EventListener(World* world);
-	void handler(const Event* evnet) override;
+	explicit EventListener(World* world);
+	void handler(const Event* event) override;
 	virtual void onEvent(const EventType* event) = 0;
 
 };

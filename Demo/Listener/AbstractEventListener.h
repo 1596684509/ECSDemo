@@ -7,8 +7,8 @@ class World;
 class AbstractEventListener {
 
 public:
-	AbstractEventListener(World* world);
-	~AbstractEventListener() = default;
+	explicit AbstractEventListener(World* world);
+	virtual ~AbstractEventListener() = default;
 	virtual void handler(const Event* event) = 0;
 
 protected:
