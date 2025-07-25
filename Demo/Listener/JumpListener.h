@@ -5,6 +5,7 @@
 #include "../Common/ArcheType.h"
 #include "../Component/Velocity.h"
 #include "../Component/MoveState.h"
+#include "../Component/Jump.h"
 
 class JumpListener: public EventListener<JumpEvent> {
 public:

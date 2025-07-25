@@ -11,11 +11,12 @@ void EventBus::releaseEvent(Event* event) {
 
 void EventBus::commit() {
 
-    for (auto& event : eventList) {
+    for (Event* event : eventList) {
         auto it = listeners.find(typeid(*event));
         if (it != listeners.end()) {
             for (auto& listener : it->second) {
                 listener->handler(event);
+                event->runEnd = true;
             }
         }
     }

@@ -24,16 +24,8 @@ void initEntity() {
 	inputKey1->setJumpKey(GLFW_KEY_W);
 	world->addComponent(entity1, inputKey1);
 	world->addComponent(entity1, new Velocity(0.5f, 0));
-	world->addComponent(entity1, new Gravity(0.98f));
-
-	Entity* entity2 = new Entity();
-	world->addComponent(entity2, new Position(600, 300));
-	world->addComponent(entity2, new MoveState());
-	InputKey* inputKey2 = new InputKey();
-	inputKey2->setMoveKey(GLFW_KEY_DOWN, GLFW_KEY_LEFT, GLFW_KEY_RIGHT);
-	inputKey2->setRun(GLFW_KEY_SPACE);
-	world->addComponent(entity2, inputKey2);
-	world->addComponent(entity2, new Velocity(0.5f, 0));
+	world->addComponent(entity1, new Gravity(0.098f));
+	world->addComponent(entity1, new Jump(2, -1.1f));
 
 	world->commitComponent();
 

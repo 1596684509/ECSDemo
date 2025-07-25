@@ -17,6 +17,7 @@
 #include "Component/Position.h"
 #include "Component/Velocity.h"
 #include "Component/Gravity.h"
+#include "Component/Jump.h"
 
 #include "System/CharacterDrawSystem.h"
 #include "System/MoveUpdateSystem.h"

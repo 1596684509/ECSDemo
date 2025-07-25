@@ -9,12 +9,18 @@ void JumpListener::onEvent(const JumpEvent* event) {
 
 	MoveState* moveState = archeType->getComponentForIndex<MoveState>(index);
 	Velocity* velocity = archeType->getComponentForIndex<Velocity>(index);
+	Jump* jump = archeType->getComponentForIndex<Jump>(index);
 
-	if (moveState && velocity) {
+	if (moveState && velocity && jump) {
 	
-		moveState->canJump = false;
+		jump->nowJumpCount++;
+
+		if (jump->nowJumpCount >= jump->maxJumpCount) {
+			moveState->canJump = false;
+		}
+
 		moveState->isJump = true;
-		velocity->y += -5;
+		velocity->y = jump->jumpPower;
 
 	}
 

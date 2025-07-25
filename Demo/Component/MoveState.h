@@ -14,4 +14,6 @@ public:
     bool isJump = false;
     bool isRun = false;
 
+    bool inGround = false;
+
 };

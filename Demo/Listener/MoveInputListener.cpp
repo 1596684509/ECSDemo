@@ -19,7 +19,7 @@ void MoveInputListener::onEvent(const InputEvent* event) {
 
 void MoveInputListener::onPress(int key, int mods) {
 
-    std::vector<ArcheType*> archeTypes = world->getArcheType<MoveState, InputKey>();
+    std::vector<ArcheType*> archeTypes = world->getArcheType<MoveState, InputKey, Jump>();
     for (ArcheType* archeType : archeTypes) {
 
         std::vector<MoveState*> moves = archeType->getComponents<MoveState>();

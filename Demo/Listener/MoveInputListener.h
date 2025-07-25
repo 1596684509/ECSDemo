@@ -9,6 +9,10 @@
 #include "../Common/World.h"
 #include "../Event/JumpEvent.h"
 
+#include "../Component/MoveState.h"
+#include "../Component/InputKey.h"
+#include "../Component/Jump.h"
+
 class MoveInputListener: public EventListener<InputEvent>{
 
 public:

@@ -16,16 +16,13 @@ void GravityUpdateSystem::onUpdate(World* world, int delta) {
             Gravity* gravity = gravitys[i];
             Position* position = positions[i];
 
-            if (gravity->canGravity && position->y < WINDOW_HEIGHT - 200) {
-
-                velocity->y = gravity->gravity * delta;
-
-            }
-            else {
+            if (!gravity->canGravity) {
             
-                velocity->y = 0;
+                continue;
 
             }
+
+            velocity->y += gravity->gravity;
 
         }
 
