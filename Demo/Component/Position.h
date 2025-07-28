@@ -1,5 +1,7 @@
 #pragma once
 
+#include <functional>
+
 #include "Component.h"
 #include "ComponentType.h"
 
@@ -10,5 +12,9 @@ public:
 	float y;
 
 	Position(float x, float y);
+	bool operator==(const Position& other) const;
 
 };
+
+
+

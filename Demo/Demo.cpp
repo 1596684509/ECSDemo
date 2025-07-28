@@ -18,14 +18,18 @@ void initEntity() {
 	Entity* entity1 = new Entity();
 	world->addComponent(entity1, new Position(300, 300));
 	world->addComponent(entity1, new MoveState());
-	InputKey* inputKey1 = new InputKey();
-	inputKey1->setMoveKey(GLFW_KEY_S, GLFW_KEY_A, GLFW_KEY_D);
-	inputKey1->setRun(GLFW_KEY_SPACE);
-	inputKey1->setJumpKey(GLFW_KEY_W);
-	world->addComponent(entity1, inputKey1);
+	InputKey* inputkey1 = InputKey::InputKeyBuilder()
+		.setMoveDown(GLFW_KEY_S)
+		.setMoveLeft(GLFW_KEY_A)
+		.setMoveRight(GLFW_KEY_D)
+		.setRun(GLFW_KEY_SPACE)
+		.setJump(GLFW_KEY_W)
+		.build();
+
+	world->addComponent(entity1, inputkey1);
 	world->addComponent(entity1, new Velocity(0.5f, 0));
-	world->addComponent(entity1, new Gravity(0.098f));
-	world->addComponent(entity1, new Jump(2, -1.1f));
+	world->addComponent(entity1, new Gravity(1.6e-3f));
+	world->addComponent(entity1, new Jump(-1, -0.5f));
 
 	world->commitComponent();
 

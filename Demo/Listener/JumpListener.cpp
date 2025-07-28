@@ -15,7 +15,7 @@ void JumpListener::onEvent(const JumpEvent* event) {
 	
 		jump->nowJumpCount++;
 
-		if (jump->nowJumpCount >= jump->maxJumpCount) {
+		if (jump->maxJumpCount != -1 && jump->nowJumpCount >= jump->maxJumpCount) {
 			moveState->canJump = false;
 		}
 

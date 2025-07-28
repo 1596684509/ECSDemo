@@ -22,7 +22,7 @@ void GravityUpdateSystem::onUpdate(World* world, int delta) {
 
             }
 
-            velocity->y += gravity->gravity;
+            velocity->y += gravity->gravity * delta;
 
         }
 
