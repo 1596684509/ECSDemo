@@ -9,18 +9,20 @@
 
 class BitMask {
 public:
-	BitMask();
-	BitMask(size_t size);
+	BitMask(size_t size = 10);
 	std::string toString();
 	int get(size_t index);
 	void set(size_t index);
 	void clear(size_t index);
+
+	static BitMask* createComponentBitMask();
 
 	bool operator==(const BitMask& bitMask) const;
 	bool operator!=(const BitMask& bitMask) const;
 
 
 private:
+	BitMask();
 	size_t size;
 	std::vector<uint64_t> bitMask;
 

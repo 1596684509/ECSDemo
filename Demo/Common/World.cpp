@@ -5,7 +5,7 @@
 
 void World::commitComponent() {
 
-	for (auto& entity : componentCash) {
+	for (auto& entity : componentCache) {
 
 		Entity* ent = entity.first;
 		ArcheType archeType;
@@ -22,24 +22,25 @@ void World::commitComponent() {
 
 			if (archeTypes.find(bitmask) != archeTypes.end()) {
 			
-				archeTypes[bitmask]->addEntity(&archeType);
+				archeTypes[bitmask]->addEntity(archeType);
 
 			}else {
 			
 				ArcheType* addObj = new ArcheType();
-				addObj->addEntity(&archeType);
+				addObj->addEntity(archeType);
 				addObj->build();
-				archeTypes[addObj->getBitMask()->toString()] = addObj;
+				bitmask = addObj->getBitMask()->toString();
+				archeTypes[bitmask] = addObj;
 
 			}
 
-		}
+			entitys[ent] = bitmask;
 
-		entitys[ent->getUUID()] = ent;
+		}
 
 	}
 
-	componentCash.clear();
+	componentCache.clear();
 
 }
 

@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include <memory>
 
@@ -6,7 +6,9 @@
 #include "AbstractEventListener.h"
 #include "../Event/Event.h"
 
-
+/*
+* 所有事件监听器的父类
+*/
 template<typename EventType>
 class EventListener : public AbstractEventListener {
 

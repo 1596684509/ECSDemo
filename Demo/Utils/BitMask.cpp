@@ -1,6 +1,5 @@
 ﻿#include "BitMask.h"
 
-BitMask::BitMask(): BitMask(static_cast<size_t>(ComponentType::Count)) {}
 
 BitMask::BitMask(size_t size) : size(size) {
 
@@ -87,5 +86,11 @@ std::string BitMask::toString() {
 		result += bits.to_string();
 	}
 	return result;
+
+}
+
+BitMask* BitMask::createComponentBitMask() {
+
+	return new BitMask(static_cast<size_t>(ComponentType::Count));
 
 }

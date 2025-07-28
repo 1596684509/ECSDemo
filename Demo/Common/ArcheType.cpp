@@ -14,7 +14,7 @@ bool ArcheType::build() {
 
 	}
 
-	BitMask* bit = new BitMask();
+	BitMask* bit = BitMask::createComponentBitMask();
 
 	for (auto& com : components) {
 	
@@ -38,8 +38,9 @@ void ArcheType::addEntity(Entity* entity, Component* com) {
 		entitys.push_back(entity);
 
 	}
-	components[typeid(*com)].push_back(com);
 
+	components[typeid(*com)].push_back(com);
+	
 }
 
 int ArcheType::hasEntity(Entity* entity) {
@@ -58,13 +59,13 @@ int ArcheType::hasEntity(Entity* entity) {
 
 }
 
-void ArcheType::addEntity(ArcheType* archeType) {
+void ArcheType::addEntity(ArcheType& archeType) {
 
-	for (int i = 0; i < archeType->entitys.size(); i++) {
+	for (int i = 0; i < archeType.entitys.size(); i++) {
 
-		for (auto& com : archeType->components) {
+		for (auto& com : archeType.components) {
 		
-			addEntity(archeType->getEntity(i), com.second[i]);
+			addEntity(archeType.getEntity(i), com.second[i]);
 
 		}
 
@@ -90,4 +91,18 @@ int ArcheType::getComponentCount() {
 
 int ArcheType::getEntityCount() {
 	return entitys.size();
+}
+
+std::unordered_map<std::type_index, Component*> ArcheType::getAllComponentForIndex(size_t index) {
+
+	std::unordered_map<std::type_index, Component*> comps;
+
+	for (auto&& comp : components) {
+	
+		comps[comp.first] = comp.second[index];
+
+	}
+
+	return comps;
+
 }

@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include <unordered_map>
 #include <typeindex>
@@ -24,6 +24,7 @@ public:
 	void addComponent(Entity* entity, T* component);
 	template <typename... T>
 	std::vector<ArcheType*> getArcheType();
+	//将组件缓存提交至主系统
 	void commitComponent();
 
 	void registerUpdateSystem(UpdateSystem* system);
@@ -36,9 +37,10 @@ public:
 	EventBus* getEventBus();
 
 private:
-	std::unordered_map<int, Entity*> entitys;
+	//记录实体和其组件集位掩码
+	std::unordered_map<Entity*, std::string> entitys;
 	std::unordered_map<std::string, ArcheType*> archeTypes;
-	std::unordered_map<Entity*, std::unordered_map<std::type_index, Component*>> componentCash;
+	std::unordered_map<Entity*, std::unordered_map<std::type_index, Component*>> componentCache;
 	std::vector<UpdateSystem*> updateSystems;
 	std::vector<DrawSystem*> drawSystems;
 	EventBus* eventBus = nullptr;
@@ -49,7 +51,7 @@ template <typename T>
 void World::addComponent(Entity* entity, T* component) {
 
 	component->setBitMaskDigits(ComponentBitMaskDigits<T>::bitMaskDigits);
-	componentCash[entity][typeid(T)] = component;
+	componentCache[entity][typeid(T)] = component;
 
 }
 

@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include <vector>
 #include <unordered_map>
@@ -15,7 +15,7 @@ public:
 	bool build();
 	BitMask* getBitMask();
 	void addEntity(Entity* entity, Component* com);
-	void addEntity(ArcheType* archeType);
+	void addEntity(ArcheType& archeType);
 	Entity* getEntity(size_t index);
 	int hasEntity(Entity* entity);
 	template<typename... T>
@@ -24,7 +24,10 @@ public:
 	std::vector<T*> getComponents();
 	template<typename T>
 	T* getComponentForIndex(size_t index);
+	std::unordered_map<std::type_index, Component*> getAllComponentForIndex(size_t index);
+	//获取组件种类个数
 	int getComponentCount();
+	//获取实体个数
 	int getEntityCount();
 
 private:
