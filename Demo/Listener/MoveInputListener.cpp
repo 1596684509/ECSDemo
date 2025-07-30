@@ -35,7 +35,7 @@ void MoveInputListener::onPress(int key, int mods) {
             if (key == inputKey->run) moveState->isRun = true;
             if (key == inputKey->jump && moveState->canJump) {
             
-                JumpEvent* jumpEvent = world->getEventBus()->createEvent<JumpEvent>();
+                JumpEvent* jumpEvent = PoolHandler::getInstance()->getObject<JumpEvent>();
                 jumpEvent->archeType = archeType;
                 jumpEvent->index = i;
                 world->getEventBus()->emit(jumpEvent);

@@ -9,6 +9,7 @@
 
 #include "Entity.h"
 #include "../Utils/BitMask.h"
+#include "../Utils/PoolHandler.h"
 #include "../Common/ArcheType.h"
 #include "../Component/ComponentBitMaskDigits.h"
 #include "../System/UpdateSystem.h"

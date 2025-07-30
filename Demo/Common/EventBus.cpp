@@ -1,18 +1,10 @@
-#include "EventBus.h"
-
-std::unordered_map<std::type_index, std::vector<Event*>> EventBus::eventPool;
-
-void EventBus::releaseEvent(Event* event) {
-
-	event->reset();
-	eventPool[typeid(event)].emplace_back(event);
-
-}
+﻿#include "EventBus.h"
 
 void EventBus::commit() {
 
     for (Event* event : eventList) {
-        auto it = listeners.find(typeid(*event));
+
+        auto&& it = listeners.find(typeid(*event));
         if (it != listeners.end()) {
             for (auto& listener : it->second) {
                 listener->handler(event);
@@ -26,18 +18,25 @@ void EventBus::commit() {
 }
 
 void EventBus::clearEventList() {
+    PoolHandler* poolHandler = PoolHandler::getInstance();
 
-    for (Event* e : eventList) {
+    // 暂存需要释放的对象
+    std::vector<Event*> toRelease;
 
+    // 保留未处理完的事件
+    eventList.erase(std::remove_if(eventList.begin(), eventList.end(), [&](Event* e) {
         if (e->runEnd) {
-            e->reset();
-            eventPool[typeid(e)].emplace_back(e);
+            toRelease.push_back(e);  // 还没 reset，状态是完整的
+            return true;             // 从 eventList 中删除
         }
+        return false;
+        }), eventList.end());
 
+    // 全部释放
+    for (Event* e : toRelease) {
+        e->runEnd = false;
+        poolHandler->release(e); // 现在可以 reset 了
     }
-
-    eventList.erase(std::remove_if(eventList.begin(), eventList.end(), [](Event* e) { return e->runEnd; }), eventList.end());
-
 }
 
 void EventBus::emit(Event* event) {
