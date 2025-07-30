@@ -29,7 +29,7 @@ void initEntity() {
 	world->addComponent(entity1, inputkey1);
 	world->addComponent(entity1, new Velocity(0.5f, 0));
 	world->addComponent(entity1, new Gravity(1.6e-3f));
-	world->addComponent(entity1, new Jump(1, -0.5f));
+	world->addComponent(entity1, new Jump(3, -0.5f));
 
 	world->commitComponent();
 

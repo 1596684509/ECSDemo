@@ -1,9 +1,10 @@
 #pragma once
 
-class Event {
+#include "../Interface/PoolObject.h"
+
+class Event: public PoolObject {
 
 public:
 	bool runEnd = false;
-	virtual void reset() = 0;
 
 };

@@ -67,12 +67,16 @@ void World::onUpdate(int delta) {
 
 void World::onInput(GLFWwindow *window, int key, int scancode, int action, int mods) {
 
-	InputEvent* input = getEventBus()->createEvent<InputEvent>();
-	input->action = action;
-	input->key = key;
-	input->mods = mods;
+	if (key != GLFW_KEY_UNKNOWN && (action == GLFW_PRESS || action == GLFW_RELEASE)) {
 
-	getEventBus()->emit(input);
+		InputEvent* input = PoolHandler::getInstance()->getObject<InputEvent>();
+		input->action = action;
+		input->key = key;
+		input->mods = mods;
+
+		getEventBus()->emit(input);
+
+	}
 
 }
 
