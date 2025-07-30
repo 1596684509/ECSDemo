@@ -37,8 +37,8 @@ void initEntity() {
 
 void initSystem() {
 
-	world->getEventBus()->registerEvent<InputEvent>(new MoveInputListener(world));
-	world->getEventBus()->registerEvent<JumpEvent>(new JumpListener(world));
+	world->getEventBus()->registerEventListener<InputEvent>(new MoveInputListener(world));
+	world->getEventBus()->registerEventListener<JumpEvent>(new JumpListener(world));
 
 	world->registerUpdateSystem(new MoveUpdateSystem());
 	world->registerUpdateSystem(new GravityUpdateSystem());

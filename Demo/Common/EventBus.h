@@ -19,7 +19,7 @@ public:
 	void releaseEvent(Event* event);
 	//注册事件
 	template<typename T>
-	void registerEvent(EventListener<T>* listener);
+	void registerEventListener(EventListener<T>* listener);
 	//发布事件
 	void emit(Event* event);
 	//提交并执行
@@ -56,7 +56,7 @@ T* EventBus::createEvent() {
 }
 
 template<typename T>
-void EventBus::registerEvent(EventListener<T>* listener) {
+void EventBus::registerEventListener(EventListener<T>* listener) {
 
 	auto& vec = listeners[typeid(T)];
 	vec.push_back(listener);
