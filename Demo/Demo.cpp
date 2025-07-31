@@ -1,48 +1,14 @@
 ﻿
 #include "Demo.h"
 
-
 using namespace std;
 
-World* world = new World();
+SceneManager* sceneManager = SceneManager::getInstance();
 bool isRunning = true;
 
 void onInput(GLFWwindow* window, int key, int scancode, int action, int mods) {
 
-	world->onInput(window, key, scancode, action, mods);
-
-}
-
-void initEntity() {
-
-	Entity* entity1 = new Entity();
-	world->addComponent(entity1, new Position(300, 300));
-	world->addComponent(entity1, new MoveState());
-	InputKey* inputkey1 = InputKey::InputKeyBuilder()
-		.setMoveDown(GLFW_KEY_S)
-		.setMoveLeft(GLFW_KEY_A)
-		.setMoveRight(GLFW_KEY_D)
-		.setRun(GLFW_KEY_SPACE)
-		.setJump(GLFW_KEY_W)
-		.build();
-
-	world->addComponent(entity1, inputkey1);
-	world->addComponent(entity1, new Velocity(0.5f, 0));
-	world->addComponent(entity1, new Gravity(1.6e-3f));
-	world->addComponent(entity1, new Jump(3, -0.5f));
-
-	world->commitComponent();
-
-}
-
-void initSystem() {
-
-	world->getEventBus()->registerEventListener<InputEvent>(new MoveInputListener(world));
-	world->getEventBus()->registerEventListener<JumpEvent>(new JumpListener(world));
-
-	world->registerUpdateSystem(new MoveUpdateSystem());
-	world->registerUpdateSystem(new GravityUpdateSystem());
-	world->registerDrawSystem(new CharacterDrawSystem());
+	sceneManager->getNowScene()->onInput(window, key, scancode, action, mods);
 
 }
 
@@ -68,10 +34,6 @@ int main() {
 		return -1;
 	}
 
-	initEntity();
-	initSystem();
-
-	
 	glfwSetKeyCallback(window, onInput);
 
 	DWORD64 start = GetTickCount64();
@@ -84,11 +46,11 @@ int main() {
 		//处理IO
 		glfwPollEvents();
 		//更新
-		world->getEventBus()->commit();
-		world->onUpdate(update);
+		sceneManager->getNowScene()->onUpdata(update);
+		sceneManager->backgroundUpdata(update);
 		//绘制
 		glClear(GL_COLOR_BUFFER_BIT);
-		world->onDraw();
+		sceneManager->getNowScene()->onDraw();
 		glfwSwapBuffers(window);
 		//限制帧数
 		DWORD64 loopEnd = GetTickCount64();
