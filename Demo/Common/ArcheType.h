@@ -12,6 +12,7 @@
 class ArcheType {
 
 public:
+	//计算集合值
 	bool build();
 	BitMask* getBitMask();
 	void addEntity(Entity* entity, Component* com);

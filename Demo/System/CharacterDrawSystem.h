@@ -2,7 +2,6 @@
 
 #include <windows.h>
 #include <vector>
-#include <glad/glad.h>
 #include <cmath>
 #include <iostream>
 
