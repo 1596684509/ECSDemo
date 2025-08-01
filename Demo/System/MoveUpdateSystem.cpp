@@ -53,17 +53,7 @@ void MoveUpdateSystem::onUpdate(World *world, int delta) {
                 }
 
                 if (arche->getEntity(i) == Entity::getPlayer()) {
-                    Camera* camera = world->getCamera();
-
-                    // 先居中跟随
-                    camera->x = position->x - WINDOW_WIDTH / 2;
-                    camera->y = position->y - WINDOW_HEIGHT / 2;
-
-                    // 再限制在地图范围内（避免越界）
-                    if (camera->x < 0) camera->x = 0;
-                    if (camera->y < 0) camera->y = 0;
-                    if (camera->x > WORLD_WIDTH - WINDOW_WIDTH) camera->x = WORLD_WIDTH - WINDOW_WIDTH;
-                    if (camera->y > WORLD_HEIGHT - WINDOW_HEIGHT) camera->y = WORLD_HEIGHT - WINDOW_HEIGHT;
+                    setCameraPosition(world, position);
                 }
 
 
@@ -74,3 +64,20 @@ void MoveUpdateSystem::onUpdate(World *world, int delta) {
     }
 
 }
+
+void MoveUpdateSystem::setCameraPosition(World* world, const Position* position) {
+
+    Camera* camera = world->getCamera();
+
+    // 先居中跟随
+    camera->x = position->x - WINDOW_WIDTH / 2;
+    camera->y = position->y - WINDOW_HEIGHT / 2;
+
+    // 再限制在地图范围内（避免越界）
+    if (camera->x < 0) camera->x = 0;
+    if (camera->y < 0) camera->y = 0;
+    if (camera->x > WORLD_WIDTH - WINDOW_WIDTH) camera->x = WORLD_WIDTH - WINDOW_WIDTH;
+    if (camera->y > WORLD_HEIGHT - WINDOW_HEIGHT) camera->y = WORLD_HEIGHT - WINDOW_HEIGHT;
+
+}
+

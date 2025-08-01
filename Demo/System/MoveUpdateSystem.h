@@ -12,7 +12,10 @@
 
 
 
-class MoveUpdateSystem: public UpdateSystem{
+class MoveUpdateSystem : public UpdateSystem {
 public:
     void onUpdate(World* world, int delta) override;
+
+private:
+    void setCameraPosition(World* world, const Position* position);
 };
