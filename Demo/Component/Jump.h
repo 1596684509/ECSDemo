@@ -3,7 +3,7 @@
 
 class Jump : public Component {
 public:
-
+	Jump() = default;
 	Jump(int maxJumpCount, float jumpPower);
 
 	int maxJumpCount;

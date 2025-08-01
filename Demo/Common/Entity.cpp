@@ -1,5 +1,8 @@
 #include "Entity.h"
 
+Entity* Entity::gloBalEntity = nullptr;
+Entity* Entity::player = nullptr;
+
 Entity::Entity() {
 
 	uuid = UUIDHandler::createUUID();
@@ -22,8 +25,30 @@ bool Entity::operator!=(const Entity& entity){
 	return !(*this == entity);
 }
 
-Entity* Entity::createGloBalEntity() {
+Entity* Entity::getGloBalEntity() {
 
-	return new Entity(0);
+	if (!gloBalEntity) {
+	
+		gloBalEntity = new Entity(0);
 
+	}
+
+	return gloBalEntity;
+
+}
+
+Entity* Entity::getPlayer() {
+
+	if (!player) {
+
+		player = new Entity(1);
+
+	}
+
+	return player;
+
+}
+
+void Entity::reset() {
+	uuid = UUIDHandler::createUUID();
 }

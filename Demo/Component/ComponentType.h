@@ -11,6 +11,7 @@ enum class ComponentType {
 	MoveState,
 	Gravity,
 	Jump,
+	Camera,
 	Count
 
 };

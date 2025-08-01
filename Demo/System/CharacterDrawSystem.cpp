@@ -57,7 +57,7 @@ static unsigned int createProgram() {
     return program;
 }
 
-void CharacterDrawSystem::onDraw(World* world) {
+void CharacterDrawSystem::onDraw(World* world, Camera* camera) {
     if (!initialized) {
         std::vector<float> vertices;
         vertices.push_back(0.0f);
@@ -96,8 +96,11 @@ void CharacterDrawSystem::onDraw(World* world) {
         std::vector<Position*> positions = archetype->getComponents<Position>();
         for (auto& position : positions) {
 
-            float ndcX = (position->x / (WINDOW_WIDTH / 2.0f)) - 1.0f;
-            float ndcY = 1.0f - (position->y / (WINDOW_HEIGHT / 2.0f));
+            float windowX = position->x - camera->x;
+            float windowY = position->y - camera->y;
+
+            float ndcX = (windowX / (WINDOW_WIDTH / 2.0f)) - 1.0f;
+            float ndcY = 1.0f - (windowY / (WINDOW_HEIGHT / 2.0f));
 
             glUniform2f(offsetLoc, ndcX, ndcY);
             glDrawArrays(GL_TRIANGLE_FAN, 0, segments + 2);

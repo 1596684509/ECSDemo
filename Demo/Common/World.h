@@ -35,6 +35,7 @@ public:
 	void onUpdate(int delta);
 	void onInput(GLFWwindow* window, int key, int scancode, int action, int mods);
 	void onDraw();
+	Camera* getCamera();
 
 	EventBus* getEventBus();
 

@@ -11,5 +11,5 @@
 
 
 class CharacterDrawSystem: public DrawSystem {
-    void onDraw(World *world) override;
+    void onDraw(World *world, Camera* camera) override;
 };

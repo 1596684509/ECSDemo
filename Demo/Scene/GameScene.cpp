@@ -44,9 +44,32 @@ void GameScene::onExit() {
 
 void GameScene::initEntity() {
 
-	Entity* entity1 = new Entity();
-	world->addComponent(entity1, new Position(300, 300));
-	world->addComponent(entity1, new MoveState());
+	Entity* globalEntity = Entity::getGloBalEntity();
+	Camera* camera = new Camera();
+	camera->x = 0;
+	camera->y = 0;
+	camera->width = WINDOW_WIDTH;
+	camera->height = WINDOW_HEIGHT;
+	world->addComponent(globalEntity, camera);
+
+	PoolHandler* poolHandler = PoolHandler::getInstance();
+	MoveState* moveState = poolHandler->getObject<MoveState>();
+
+	Velocity* velocity = poolHandler->getObject<Velocity>();
+	velocity->x = 0.5;
+	velocity->y = 0;
+
+	Position* position = poolHandler->getObject<Position>();
+	position->x = 0;
+	position->y = 0;
+
+	Gravity* gravity = poolHandler->getObject<Gravity>();
+	gravity->gravity = 1.6e-3f;
+
+	Jump* jump = poolHandler->getObject<Jump>();
+	jump->jumpPower = -0.5f;
+	jump->maxJumpCount = 3;
+
 	InputKey* inputkey1 = InputKey::InputKeyBuilder()
 		.setMoveDown(GLFW_KEY_S)
 		.setMoveLeft(GLFW_KEY_A)
@@ -55,10 +78,13 @@ void GameScene::initEntity() {
 		.setJump(GLFW_KEY_W)
 		.build();
 
-	world->addComponent(entity1, inputkey1);
-	world->addComponent(entity1, new Velocity(0.5f, 0));
-	world->addComponent(entity1, new Gravity(1.6e-3f));
-	world->addComponent(entity1, new Jump(3, -0.5f));
+	Entity* player1 = Entity::getPlayer();
+	world->addComponent(player1, position);
+	world->addComponent(player1, moveState);
+	world->addComponent(player1, inputkey1);
+	world->addComponent(player1, velocity);
+	world->addComponent(player1, gravity);
+	world->addComponent(player1, jump);
 
 	world->commitComponent();
 

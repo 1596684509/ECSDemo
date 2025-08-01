@@ -83,7 +83,7 @@ void World::onInput(GLFWwindow *window, int key, int scancode, int action, int m
 void World::onDraw() {
 
 	for (auto& system : drawSystems) {
-		system->onDraw(this);
+		system->onDraw(this, getCamera());
 	}
 
 }
@@ -97,5 +97,13 @@ EventBus* World::getEventBus() {
 	}
 
 	return eventBus;
+
+}
+
+Camera* World::getCamera() {
+
+	Entity* globalEntity =  Entity::getGloBalEntity();
+	ArcheType* archeTpye = archeTypes[entitys[globalEntity]];
+	return archeTpye->getComponentForIndex<Camera>(archeTpye->hasEntity(globalEntity));
 
 }

@@ -26,7 +26,7 @@ add_executable (Demo "Demo.cpp" "Demo.h" "Utils/UUIDHandler.h" "Lib/glad.c" "Com
         System/DrawSystem.h
         System/CharacterDrawSystem.h
         System/CharacterDrawSystem.cpp
- "Common/EventBus.h" "Event/Event.h" "Common/EventBus.cpp"  "Listener/EventListener.h" "Listener/AbstractEventListener.cpp" "Listener/AbstractEventListener.h" "Listener/EventListener.cpp" "Listener/MoveInputListener.h" "Event/InputEvent.h" "Listener/MoveInputListener.cpp" "Event/InputEvent.cpp" "Component/Gravity.h" "Component/Gravity.cpp" "System/GravityUpdateSystem.h" "System/GravityUpdateSystem.cpp" "Event/JumpEvent.h" "Listener/JumpListener.h" "Event/JumpEvent.cpp" "Listener/JumpListener.cpp" "Component/Jump.h" "Component/Jump.cpp"  "Common/EntityManager.h"   "Utils/PoolHandler.h" "Utils/PoolHandler.cpp" "Scene/MenuScene.h" "Scene/MenuScene.cpp"  "Common/SceneManager.h" "Common/SceneManager.cpp" "Scene/GameScene.h" "Scene/GameScene.cpp")
+ "Common/EventBus.h" "Event/Event.h" "Common/EventBus.cpp"  "Listener/EventListener.h" "Listener/AbstractEventListener.cpp" "Listener/AbstractEventListener.h" "Listener/EventListener.cpp" "Listener/MoveInputListener.h" "Event/InputEvent.h" "Listener/MoveInputListener.cpp" "Event/InputEvent.cpp" "Component/Gravity.h" "Component/Gravity.cpp" "System/GravityUpdateSystem.h" "System/GravityUpdateSystem.cpp" "Event/JumpEvent.h" "Listener/JumpListener.h" "Event/JumpEvent.cpp" "Listener/JumpListener.cpp" "Component/Jump.h" "Component/Jump.cpp"  "Common/EntityManager.h"   "Utils/PoolHandler.h" "Utils/PoolHandler.cpp" "Scene/MenuScene.h" "Scene/MenuScene.cpp"  "Common/SceneManager.h" "Common/SceneManager.cpp" "Scene/GameScene.h" "Scene/GameScene.cpp" "Component/Camera.cpp")
 
 target_link_libraries(Demo glfw3 opengl32)
 
