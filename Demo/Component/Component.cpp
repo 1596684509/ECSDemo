@@ -6,3 +6,5 @@ void Component::setBitMaskDigits(int bitMaskDigits) {
 int Component::getBitMaskDigits() {
 	return bitMaskDigits;
 }
+
+void Component::reset() {}

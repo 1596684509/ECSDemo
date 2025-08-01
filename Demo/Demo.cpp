@@ -5,10 +5,21 @@ using namespace std;
 
 SceneManager* sceneManager = SceneManager::getInstance();
 bool isRunning = true;
+bool isPause = false;
 
 void onInput(GLFWwindow* window, int key, int scancode, int action, int mods) {
 
-	sceneManager->getNowScene()->onInput(window, key, scancode, action, mods);
+	if (key == GLFW_KEY_P && action == GLFW_PRESS) {
+	
+		isPause = !isPause;
+
+	}
+
+	if (!isPause || action == GLFW_RELEASE) {
+	
+		sceneManager->getNowScene()->onInput(window, key, scancode, action, mods);
+
+	}
 
 }
 
@@ -46,8 +57,10 @@ int main() {
 		//处理IO
 		glfwPollEvents();
 		//更新
-		sceneManager->getNowScene()->onUpdata(update);
-		sceneManager->backgroundUpdata(update);
+		if (!isPause) {
+			sceneManager->getNowScene()->onUpdata(update);
+			sceneManager->backgroundUpdata(update);
+		}
 		//绘制
 		glClear(GL_COLOR_BUFFER_BIT);
 		sceneManager->getNowScene()->onDraw();

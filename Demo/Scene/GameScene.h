@@ -8,6 +8,7 @@
 #include "../Component/Velocity.h"
 #include "../Component/Gravity.h"
 #include "../Component/Jump.h"
+#include "../Component/Camera.h"
 
 #include "../System/CharacterDrawSystem.h"
 #include "../System/MoveUpdateSystem.h"
@@ -15,6 +16,8 @@
 
 #include "../Listener/MoveInputListener.h"
 #include "../Listener/JumpListener.h"
+
+#include "../Utils/PoolHandler.h"
 
 class GameScene: public Scene {
 

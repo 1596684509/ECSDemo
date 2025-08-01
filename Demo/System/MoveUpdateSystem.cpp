@@ -1,4 +1,4 @@
-//
+﻿//
 // Created by admin on 25-7-17.
 //
 
@@ -36,6 +36,12 @@ void MoveUpdateSystem::onUpdate(World *world, int delta) {
                 position->x += speedX * delta * direction;
                 position->y += velocity->y * delta;
 
+                position->x = std::max(0, (int)position->x);
+                position->x = std::min(WORLD_WIDTH, (int)position->x);
+
+                position->y = std::max(0, (int)position->y);
+                position->y = std::min(WORLD_WIDTH, (int)position->y);
+
                 if (position->y > GROUND_HEIGHT) {
                 
                     position->y = GROUND_HEIGHT;
@@ -44,6 +50,20 @@ void MoveUpdateSystem::onUpdate(World *world, int delta) {
                     moveState->canJump = true;
                     moveState->isJump = false;
                     jump->nowJumpCount = 0;
+                }
+
+                if (arche->getEntity(i) == Entity::getPlayer()) {
+                    Camera* camera = world->getCamera();
+
+                    // 先居中跟随
+                    camera->x = position->x - WINDOW_WIDTH / 2;
+                    camera->y = position->y - WINDOW_HEIGHT / 2;
+
+                    // 再限制在地图范围内（避免越界）
+                    if (camera->x < 0) camera->x = 0;
+                    if (camera->y < 0) camera->y = 0;
+                    if (camera->x > WORLD_WIDTH - WINDOW_WIDTH) camera->x = WORLD_WIDTH - WINDOW_WIDTH;
+                    if (camera->y > WORLD_HEIGHT - WINDOW_HEIGHT) camera->y = WORLD_HEIGHT - WINDOW_HEIGHT;
                 }
 
 
